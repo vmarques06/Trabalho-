@@ -19,22 +19,22 @@
             background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
             border: 1px solid #d1d5db;
         }
+        .category-badge.mda { border-left: 3px solid #1a3b5d; }
+        .category-badge.sda { border-left: 3px solid #10b981; }
         .pdf-header {
             background: linear-gradient(135deg, #1a3b5d 0%, #0f2440 100%);
         }
-        /* Animação suave para novos itens */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .animate-fade-in {
-            animation: fadeIn 0.3s ease-out forwards;
-        }
-        /* Cores Electrolux */
+        .animate-fade-in { animation: fadeIn 0.3s ease-out forwards; }
         .electrolux-primary { color: #1a3b5d; }
         .electrolux-bg { background-color: #1a3b5d; }
         .electrolux-border { border-color: #1a3b5d; }
         .electrolux-light { background-color: #e6edf5; }
+        .mda-badge { background-color: #1a3b5d; color: white; }
+        .sda-badge { background-color: #10b981; color: white; }
     </style>
 </head>
 <body class="bg-gray-100 pb-24">
@@ -42,7 +42,7 @@
     <header class="electrolux-bg text-white p-4 sticky top-0 z-50 shadow-md flex justify-between items-center">
         <div class="flex items-center gap-2">
             <i class="fas fa-bolt text-blue-300"></i>
-            <h1 class="text-lg font-bold tracking-wide">Floorshare Linha Branca</h1>
+            <h1 class="text-lg font-bold tracking-wide">Floorshare</h1>
         </div>
         <button id="reset-top" class="text-xs bg-blue-900 hover:bg-blue-800 px-3 py-1 rounded-full transition">
             <i class="fas fa-eraser mr-1"></i> Limpar
@@ -58,6 +58,7 @@
 
         <div class="space-y-4">
             
+            <!-- SEÇÃO REDE + DATA (Equipe removida) -->
             <div class="bg-white p-4 rounded-2xl shadow-sm">
                 <h3 class="text-gray-400 text-xs font-bold uppercase tracking-wider mb-3 flex items-center">
                     <i class="fas fa-store mr-2"></i> Rede
@@ -69,22 +70,50 @@
                         <input type="text" id="filial" placeholder="Filial" class="w-full bg-gray-50 p-3 rounded-xl border-none focus:ring-2 focus:ring-blue-500 text-gray-700 text-sm transition">
                     </div>
                     <input type="text" id="cidade" placeholder="Cidade" class="w-full bg-gray-50 p-3 rounded-xl border-none focus:ring-2 focus:ring-blue-500 text-gray-700 text-sm transition">
-                </div>
-            </div>
-
-            <div class="bg-white p-4 rounded-2xl shadow-sm">
-                <h3 class="text-gray-400 text-xs font-bold uppercase tracking-wider mb-3 flex items-center">
-                    <i class="fas fa-users mr-2"></i> Equipe
-                </h3>
-                <div class="space-y-3">
-                    <input type="text" id="coordenador" placeholder="Coordenador" class="w-full bg-gray-50 p-3 rounded-xl border-none focus:ring-2 focus:ring-blue-500 text-gray-700 text-sm transition">
-                    <input type="text" id="consultor" placeholder="Consultor(a)" class="w-full bg-gray-50 p-3 rounded-xl border-none focus:ring-2 focus:ring-blue-500 text-gray-700 text-sm transition">
-                    <input type="text" id="regional" placeholder="Regional" class="w-full bg-gray-50 p-3 rounded-xl border-none focus:ring-2 focus:ring-blue-500 text-gray-700 text-sm transition">
                     <div class="relative">
                         <span class="absolute left-3 top-3 text-gray-400 text-xs">Data</span>
                         <input type="date" id="data" class="w-full bg-gray-50 pt-6 pb-2 px-3 rounded-xl border-none focus:ring-2 focus:ring-blue-500 text-gray-700 text-sm transition">
                     </div>
                 </div>
+            </div>
+
+            <!-- SEÇÃO DE CONFIGURAÇÃO DE CATEGORIAS -->
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-200">
+                <h3 class="text-gray-400 text-xs font-bold uppercase tracking-wider mb-3 flex items-center">
+                    <i class="fas fa-cog mr-2"></i> Configurar Categorias
+                </h3>
+                
+                <!-- MDA - Categorias editáveis -->
+                <div class="mb-4">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="mda-badge text-xs font-bold px-2 py-1 rounded">MDA</span>
+                        <span class="text-xs text-gray-500">(até 5 categorias)</span>
+                    </div>
+                    <div id="mda-categories" class="space-y-2">
+                        <!-- Categorias MDA pré-definidas -->
+                    </div>
+                    <button type="button" id="add-mda-category" class="w-full mt-2 py-2 border border-dashed border-gray-300 text-gray-500 rounded-lg hover:bg-gray-50 hover:border-blue-400 hover:text-blue-500 transition text-xs flex items-center justify-center gap-1">
+                        <i class="fas fa-plus text-xs"></i> Adicionar categoria MDA
+                    </button>
+                </div>
+                
+                <!-- SDA - Categorias editáveis -->
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="sda-badge text-xs font-bold px-2 py-1 rounded">SDA</span>
+                        <span class="text-xs text-gray-500">(até 5 categorias)</span>
+                    </div>
+                    <div id="sda-categories" class="space-y-2">
+                        <!-- Categorias SDA pré-definidas -->
+                    </div>
+                    <button type="button" id="add-sda-category" class="w-full mt-2 py-2 border border-dashed border-gray-300 text-gray-500 rounded-lg hover:bg-gray-50 hover:border-blue-400 hover:text-blue-500 transition text-xs flex items-center justify-center gap-1">
+                        <i class="fas fa-plus text-xs"></i> Adicionar categoria SDA
+                    </button>
+                </div>
+                
+                <button type="button" id="apply-categories" class="w-full mt-4 bg-blue-600 text-white font-bold py-2 rounded-lg hover:bg-blue-700 transition text-sm">
+                    <i class="fas fa-sync-alt mr-2"></i> Atualizar Categorias
+                </button>
             </div>
 
             <div class="bg-white p-4 rounded-2xl shadow-sm border-2 electrolux-border">
@@ -107,28 +136,8 @@
                             </div>
                         </div>
                         
-                        <!-- Grid com 5 categorias: Ref, Lav, Fogão, Aspirador, AirFryer -->
-                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-2">
-                            <div class="category-badge rounded-lg p-3 text-center">
-                                <label class="text-xs text-gray-500 font-medium mb-1 block">Refrigeradores</label>
-                                <input type="number" data-marca="Electrolux" data-categoria="refrigeradores" placeholder="0" class="w-full text-center bg-transparent border-none text-lg font-bold text-gray-700 focus:outline-none" inputmode="numeric" min="0">
-                            </div>
-                            <div class="category-badge rounded-lg p-3 text-center">
-                                <label class="text-xs text-gray-500 font-medium mb-1 block">Lavadoras</label>
-                                <input type="number" data-marca="Electrolux" data-categoria="lavadoras" placeholder="0" class="w-full text-center bg-transparent border-none text-lg font-bold text-gray-700 focus:outline-none" inputmode="numeric" min="0">
-                            </div>
-                            <div class="category-badge rounded-lg p-3 text-center">
-                                <label class="text-xs text-gray-500 font-medium mb-1 block">Fogão</label>
-                                <input type="number" data-marca="Electrolux" data-categoria="fogao" placeholder="0" class="w-full text-center bg-transparent border-none text-lg font-bold text-gray-700 focus:outline-none" inputmode="numeric" min="0">
-                            </div>
-                            <div class="category-badge rounded-lg p-3 text-center">
-                                <label class="text-xs text-gray-500 font-medium mb-1 block">Aspirador</label>
-                                <input type="number" data-marca="Electrolux" data-categoria="aspirador" placeholder="0" class="w-full text-center bg-transparent border-none text-lg font-bold text-gray-700 focus:outline-none" inputmode="numeric" min="0">
-                            </div>
-                            <div class="category-badge rounded-lg p-3 text-center">
-                                <label class="text-xs text-gray-500 font-medium mb-1 block">AirFryer</label>
-                                <input type="number" data-marca="Electrolux" data-categoria="airfryer" placeholder="0" class="w-full text-center bg-transparent border-none text-lg font-bold text-gray-700 focus:outline-none" inputmode="numeric" min="0">
-                            </div>
+                        <div id="electrolux-categories" class="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-2">
+                            <!-- Categorias serão geradas dinamicamente -->
                         </div>
                         <div class="text-xs text-gray-400 text-center mt-1">
                             <i class="fas fa-info-circle mr-1"></i>Marca principal
@@ -199,10 +208,191 @@
         const { jsPDF } = window.jspdf;
         document.getElementById('data').valueAsDate = new Date();
 
-        // Template para marcas concorrentes (Atualizado com Fogão, Aspirador e AirFryer)
+        // Estado das categorias (editável)
+        let categoriasMDA = [
+            { nome: 'Refrigerador', key: 'refrigerador' },
+            { nome: 'Fogão', key: 'fogao' },
+            { nome: 'Lavadora', key: 'lavadora' },
+            { nome: 'Microondas', key: 'microondas' }
+        ];
+        
+        let categoriasSDA = [
+            { nome: 'Airfryer', key: 'airfryer' },
+            { nome: 'Aspirador', key: 'aspirador' }
+        ];
+
+        // Função para normalizar chave (remover acentos, espaços, etc)
+        function normalizarChave(nome) {
+            return nome.toLowerCase()
+                .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+                .replace(/[^a-z0-9]/g, '')
+                .substring(0, 20);
+        }
+
+        // Renderizar categorias na seção de configuração
+        function renderizarConfigCategorias() {
+            const mdaContainer = document.getElementById('mda-categories');
+            const sdaContainer = document.getElementById('sda-categories');
+            
+            mdaContainer.innerHTML = categoriasMDA.map((cat, index) => `
+                <div class="flex items-center gap-2 bg-gray-50 p-2 rounded-lg">
+                    <input type="text" value="${cat.nome}" 
+                           class="mda-category-name flex-1 bg-white border border-gray-300 rounded px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
+                           data-index="${index}" data-tipo="mda">
+                    <button type="button" class="remove-category text-red-400 hover:text-red-600 p-1" data-index="${index}" data-tipo="mda">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `).join('');
+            
+            sdaContainer.innerHTML = categoriasSDA.map((cat, index) => `
+                <div class="flex items-center gap-2 bg-gray-50 p-2 rounded-lg">
+                    <input type="text" value="${cat.nome}" 
+                           class="sda-category-name flex-1 bg-white border border-gray-300 rounded px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
+                           data-index="${index}" data-tipo="sda">
+                    <button type="button" class="remove-category text-red-400 hover:text-red-600 p-1" data-index="${index}" data-tipo="sda">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        // Adicionar categoria MDA
+        document.getElementById('add-mda-category').addEventListener('click', () => {
+            if (categoriasMDA.length >= 5) {
+                alert('Máximo de 5 categorias MDA atingido.');
+                return;
+            }
+            categoriasMDA.push({ nome: 'Nova MDA', key: '' });
+            renderizarConfigCategorias();
+        });
+
+        // Adicionar categoria SDA
+        document.getElementById('add-sda-category').addEventListener('click', () => {
+            if (categoriasSDA.length >= 5) {
+                alert('Máximo de 5 categorias SDA atingido.');
+                return;
+            }
+            categoriasSDA.push({ nome: 'Nova SDA', key: '' });
+            renderizarConfigCategorias();
+        });
+
+        // Remover categoria
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.remove-category')) {
+                const btn = e.target.closest('.remove-category');
+                const index = parseInt(btn.dataset.index);
+                const tipo = btn.dataset.tipo;
+                
+                if (tipo === 'mda') {
+                    if (categoriasMDA.length <= 1) {
+                        alert('É necessário pelo menos 1 categoria MDA.');
+                        return;
+                    }
+                    categoriasMDA.splice(index, 1);
+                } else {
+                    if (categoriasSDA.length <= 1) {
+                        alert('É necessário pelo menos 1 categoria SDA.');
+                        return;
+                    }
+                    categoriasSDA.splice(index, 1);
+                }
+                renderizarConfigCategorias();
+            }
+        });
+
+        // Atualizar nomes das categorias ao digitar
+        document.addEventListener('input', (e) => {
+            if (e.target.classList.contains('mda-category-name')) {
+                const index = parseInt(e.target.dataset.index);
+                categoriasMDA[index].nome = e.target.value;
+            } else if (e.target.classList.contains('sda-category-name')) {
+                const index = parseInt(e.target.dataset.index);
+                categoriasSDA[index].nome = e.target.value;
+            }
+        });
+
+        // Aplicar categorias e recriar os campos
+        document.getElementById('apply-categories').addEventListener('click', () => {
+            categoriasMDA.forEach(cat => {
+                cat.key = normalizarChave(cat.nome) || `mda_${Date.now()}`;
+            });
+            categoriasSDA.forEach(cat => {
+                cat.key = normalizarChave(cat.nome) || `sda_${Date.now()}`;
+            });
+            
+            renderizarCategoriasElectrolux();
+            
+            document.querySelectorAll('.competitor-categories-container').forEach(container => {
+                renderizarCategoriasConcorrente(container);
+            });
+            
+            alert('Categorias atualizadas com sucesso!');
+        });
+
+        // Renderizar categorias na Electrolux
+        function renderizarCategoriasElectrolux() {
+            const container = document.getElementById('electrolux-categories');
+            let html = '';
+            
+            categoriasMDA.forEach(cat => {
+                html += `
+                    <div class="category-badge mda rounded-lg p-3 text-center">
+                        <label class="text-xs text-gray-500 font-medium mb-1 block">${cat.nome}</label>
+                        <input type="number" data-marca="Electrolux" data-categoria="${cat.key}" data-tipo="mda" placeholder="0" 
+                               class="w-full text-center bg-transparent border-none text-lg font-bold text-gray-700 focus:outline-none" 
+                               inputmode="numeric" min="0">
+                    </div>
+                `;
+            });
+            
+            categoriasSDA.forEach(cat => {
+                html += `
+                    <div class="category-badge sda rounded-lg p-3 text-center">
+                        <label class="text-xs text-gray-500 font-medium mb-1 block">${cat.nome}</label>
+                        <input type="number" data-marca="Electrolux" data-categoria="${cat.key}" data-tipo="sda" placeholder="0" 
+                               class="w-full text-center bg-transparent border-none text-lg font-bold text-gray-700 focus:outline-none" 
+                               inputmode="numeric" min="0">
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        // Renderizar categorias para marcas concorrentes
+        function renderizarCategoriasConcorrente(container) {
+            let html = '';
+            
+            categoriasMDA.forEach(cat => {
+                html += `
+                    <div class="category-badge mda rounded-lg p-3 text-center">
+                        <label class="text-xs text-gray-500 font-medium mb-1 block">${cat.nome}</label>
+                        <input type="number" data-categoria="${cat.key}" data-tipo="mda" placeholder="0" 
+                               class="quantity-input w-full text-center bg-transparent border-none text-lg font-bold text-gray-700 focus:outline-none" 
+                               inputmode="numeric" min="0">
+                    </div>
+                `;
+            });
+            
+            categoriasSDA.forEach(cat => {
+                html += `
+                    <div class="category-badge sda rounded-lg p-3 text-center">
+                        <label class="text-xs text-gray-500 font-medium mb-1 block">${cat.nome}</label>
+                        <input type="number" data-categoria="${cat.key}" data-tipo="sda" placeholder="0" 
+                               class="quantity-input w-full text-center bg-transparent border-none text-lg font-bold text-gray-700 focus:outline-none" 
+                               inputmode="numeric" min="0">
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        // Template para marcas concorrentes
         const competitorTemplate = () => {
             const currentInputs = document.querySelectorAll('.brand-name');
-            const nextIndex = currentInputs.length + 1;
+            const nextIndex = currentInputs.length;
             
             return `
                 <div class="brand-category bg-white border border-gray-200 rounded-xl p-4 relative shadow-sm">
@@ -214,31 +404,13 @@
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <i class="fas fa-tag text-gray-400"></i>
                             </div>
-                            <input type="text" class="brand-name w-full pl-9 pr-3 py-3 bg-gray-50 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition text-gray-700" placeholder="Digite o nome da marca" value="Marca ${nextIndex}">
+                            <input type="text" class="brand-name w-full pl-9 pr-3 py-3 bg-gray-50 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition text-gray-700" 
+                                   placeholder="Digite o nome da marca" value="Marca ${nextIndex}">
                         </div>
                     </div>
                     
-                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                        <div class="category-badge rounded-lg p-3 text-center">
-                            <label class="text-xs text-gray-500 font-medium mb-1 block">Refrigeradores</label>
-                            <input type="number" data-categoria="refrigeradores" placeholder="0" class="quantity-input w-full text-center bg-transparent border-none text-lg font-bold text-gray-700 focus:outline-none" inputmode="numeric" min="0">
-                        </div>
-                        <div class="category-badge rounded-lg p-3 text-center">
-                            <label class="text-xs text-gray-500 font-medium mb-1 block">Lavadoras</label>
-                            <input type="number" data-categoria="lavadoras" placeholder="0" class="quantity-input w-full text-center bg-transparent border-none text-lg font-bold text-gray-700 focus:outline-none" inputmode="numeric" min="0">
-                        </div>
-                        <div class="category-badge rounded-lg p-3 text-center">
-                            <label class="text-xs text-gray-500 font-medium mb-1 block">Fogão</label>
-                            <input type="number" data-categoria="fogao" placeholder="0" class="quantity-input w-full text-center bg-transparent border-none text-lg font-bold text-gray-700 focus:outline-none" inputmode="numeric" min="0">
-                        </div>
-                        <div class="category-badge rounded-lg p-3 text-center">
-                            <label class="text-xs text-gray-500 font-medium mb-1 block">Aspirador</label>
-                            <input type="number" data-categoria="aspirador" placeholder="0" class="quantity-input w-full text-center bg-transparent border-none text-lg font-bold text-gray-700 focus:outline-none" inputmode="numeric" min="0">
-                        </div>
-                        <div class="category-badge rounded-lg p-3 text-center">
-                            <label class="text-xs text-gray-500 font-medium mb-1 block">AirFryer</label>
-                            <input type="number" data-categoria="airfryer" placeholder="0" class="quantity-input w-full text-center bg-transparent border-none text-lg font-bold text-gray-700 focus:outline-none" inputmode="numeric" min="0">
-                        </div>
+                    <div class="competitor-categories-container grid grid-cols-2 sm:grid-cols-3 gap-2">
+                        <!-- Categorias renderizadas dinamicamente -->
                     </div>
                 </div>
             `;
@@ -251,6 +423,9 @@
             newBrand.className = 'animate-fade-in mb-4';
             newBrand.innerHTML = competitorTemplate();
             container.appendChild(newBrand);
+            
+            const catContainer = newBrand.querySelector('.competitor-categories-container');
+            renderizarCategoriasConcorrente(catContainer);
             
             const newInput = newBrand.querySelector('.brand-name');
             if(newInput) newInput.select();
@@ -270,10 +445,12 @@
             }
         });
 
-        // Coleta de dados (Incluindo Fogão, Aspirador e AirFryer)
+        // Coleta de dados
         function coletarDadosMarcas() {
             const brandsData = {};
             const allCategories = document.querySelectorAll('.brand-category');
+            
+            const todasCategorias = [...categoriasMDA, ...categoriasSDA];
             
             allCategories.forEach(div => {
                 let brandName = '';
@@ -285,6 +462,7 @@
                     brandName = 'Electrolux';
                 } else if (editableInput) {
                     brandName = editableInput.value.trim();
+                    if (!brandName) return;
                     if (brandsData[brandName]) {
                         brandName = brandName + " (2)";
                     }
@@ -292,20 +470,16 @@
                 
                 if (!brandName) return;
 
-                const lav = parseInt(div.querySelector('[data-categoria="lavadoras"]')?.value) || 0;
-                const ref = parseInt(div.querySelector('[data-categoria="refrigeradores"]')?.value) || 0;
-                const fogao = parseInt(div.querySelector('[data-categoria="fogao"]')?.value) || 0;
-                const aspirador = parseInt(div.querySelector('[data-categoria="aspirador"]')?.value) || 0;
-                const airfryer = parseInt(div.querySelector('[data-categoria="airfryer"]')?.value) || 0;
+                const data = { total: 0 };
                 
-                brandsData[brandName] = {
-                    lavadoras: lav,
-                    refrigeradores: ref,
-                    fogao: fogao,
-                    aspirador: aspirador,
-                    airfryer: airfryer,
-                    total: lav + ref + fogao + aspirador + airfryer
-                };
+                todasCategorias.forEach(cat => {
+                    const input = div.querySelector(`[data-categoria="${cat.key}"]`);
+                    const valor = parseInt(input?.value) || 0;
+                    data[cat.key] = valor;
+                    data.total += valor;
+                });
+                
+                brandsData[brandName] = data;
             });
             
             Object.keys(brandsData).forEach(marca => {
@@ -317,25 +491,23 @@
             return brandsData;
         }
 
-        // Totais (Incluindo Fogão, Aspirador e AirFryer)
+        // Totais
         function calcularTotais(brandsData) {
-            let totalGeral = 0;
-            let totalLavadoras = 0;
-            let totalRefrigeradores = 0;
-            let totalFogao = 0;
-            let totalAspirador = 0;
-            let totalAirfryer = 0;
+            const todasCategorias = [...categoriasMDA, ...categoriasSDA];
+            const totais = { totalGeral: 0 };
             
-            Object.values(brandsData).forEach(data => {
-                totalLavadoras += data.lavadoras;
-                totalRefrigeradores += data.refrigeradores;
-                totalFogao += data.fogao;
-                totalAspirador += data.aspirador;
-                totalAirfryer += data.airfryer;
-                totalGeral += data.total;
+            todasCategorias.forEach(cat => {
+                totais[cat.key] = 0;
             });
             
-            return { totalGeral, totalLavadoras, totalRefrigeradores, totalFogao, totalAspirador, totalAirfryer };
+            Object.values(brandsData).forEach(data => {
+                totais.totalGeral += data.total;
+                todasCategorias.forEach(cat => {
+                    totais[cat.key] += (data[cat.key] || 0);
+                });
+            });
+            
+            return totais;
         }
 
         function calcularPorcentagem(valor, total) {
@@ -348,9 +520,10 @@
             return `${dia}/${mes}/${ano}`;
         }
 
-        // Resumo Visual (Incluindo Fogão, Aspirador e Airfryer)
+        // Resumo Visual
         function gerarResumoVisual(brandsData, totais) {
             let html = '';
+            const todasCategorias = [...categoriasMDA, ...categoriasSDA];
             
             const marcasOrdenadas = Object.entries(brandsData)
                 .sort(([nomeA, dataA], [nomeB, dataB]) => {
@@ -362,11 +535,6 @@
             marcasOrdenadas.forEach(([marca, data]) => {
                 const isElectrolux = marca.toUpperCase() === 'ELECTROLUX';
                 const pctTotal = calcularPorcentagem(data.total, totais.totalGeral);
-                const pctLav = calcularPorcentagem(data.lavadoras, totais.totalLavadoras);
-                const pctRef = calcularPorcentagem(data.refrigeradores, totais.totalRefrigeradores);
-                const pctFogao = calcularPorcentagem(data.fogao, totais.totalFogao);
-                const pctAsp = calcularPorcentagem(data.aspirador, totais.totalAspirador);
-                const pctAir = calcularPorcentagem(data.airfryer, totais.totalAirfryer);
                 
                 html += `
                     <div class="${isElectrolux ? 'electrolux-light border-l-4 electrolux-border' : 'bg-white border border-gray-200'} p-3 rounded-lg mb-2 shadow-sm">
@@ -374,60 +542,36 @@
                             <span class="font-bold ${isElectrolux ? 'electrolux-primary' : 'text-gray-700'}">${marca}</span>
                             <span class="font-bold electrolux-primary">${pctTotal}%</span>
                         </div>
-                        <div class="grid grid-cols-3 sm:grid-cols-5 gap-1 text-[10px] sm:text-xs">
-                             <div class="text-center">
-                                <div class="text-gray-500">Ref</div>
-                                <div class="font-semibold">${data.refrigeradores} <span class="text-green-600">(${pctRef}%)</span></div>
-                            </div>
-                            <div class="text-center">
-                                <div class="text-gray-500">Lav</div>
-                                <div class="font-semibold">${data.lavadoras} <span class="text-blue-600">(${pctLav}%)</span></div>
-                            </div>
-                            <div class="text-center">
-                                <div class="text-gray-500">Fogão</div>
-                                <div class="font-semibold">${data.fogao} <span class="text-orange-600">(${pctFogao}%)</span></div>
-                            </div>
-                            <div class="text-center">
-                                <div class="text-gray-500">Asp</div>
-                                <div class="font-semibold">${data.aspirador} <span class="text-purple-600">(${pctAsp}%)</span></div>
-                            </div>
-                            <div class="text-center">
-                                <div class="text-gray-500">AirFryer</div>
-                                <div class="font-semibold">${data.airfryer} <span class="text-red-500">(${pctAir}%)</span></div>
-                            </div>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-1 text-[10px] sm:text-xs">
+                            ${todasCategorias.map(cat => {
+                                const pct = calcularPorcentagem(data[cat.key] || 0, totais[cat.key]);
+                                return `
+                                    <div class="text-center">
+                                        <div class="text-gray-500">${cat.nome}</div>
+                                        <div class="font-semibold">${data[cat.key] || 0} 
+                                            <span class="text-blue-600">(${pct}%)</span>
+                                        </div>
+                                    </div>
+                                `;
+                            }).join('')}
                         </div>
                     </div>
                 `;
             });
             
-            // Rodapé dos totais
             html += `
                 <div class="mt-3 pt-3 border-t border-gray-300">
-                    <div class="grid grid-cols-3 sm:grid-cols-6 gap-1 text-center text-xs">
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-1 text-center text-xs">
                         <div>
-                            <div class="text-gray-500">Total</div>
+                            <div class="text-gray-500">Total Geral</div>
                             <div class="font-bold text-sm text-gray-800">${totais.totalGeral}</div>
                         </div>
-                        <div>
-                            <div class="text-green-500 font-medium text-[10px]">Ref</div>
-                            <div class="font-bold text-sm text-green-600">${totais.totalRefrigeradores}</div>
-                        </div>
-                        <div>
-                            <div class="text-blue-500 font-medium text-[10px]">Lav</div>
-                            <div class="font-bold text-sm text-blue-600">${totais.totalLavadoras}</div>
-                        </div>
-                        <div>
-                            <div class="text-orange-500 font-medium text-[10px]">Fogão</div>
-                            <div class="font-bold text-sm text-orange-600">${totais.totalFogao}</div>
-                        </div>
-                        <div>
-                            <div class="text-purple-500 font-medium text-[10px]">Asp</div>
-                            <div class="font-bold text-sm text-purple-600">${totais.totalAspirador}</div>
-                        </div>
-                        <div>
-                            <div class="text-red-500 font-medium text-[10px]">Air</div>
-                            <div class="font-bold text-sm text-red-500">${totais.totalAirfryer}</div>
-                        </div>
+                        ${todasCategorias.map(cat => `
+                            <div>
+                                <div class="text-gray-500">${cat.nome}</div>
+                                <div class="font-bold text-sm text-blue-600">${totais[cat.key]}</div>
+                            </div>
+                        `).join('')}
                     </div>
                 </div>
             `;
@@ -435,14 +579,13 @@
             return html;
         }
 
-        // Relatório Texto (Incluindo Fogão, Aspirador e AirFryer)
+        // Relatório Texto (atualizado sem campos de equipe)
         function gerarRelatorioTexto(dados, brandsData, totais) {
             let relatorio = `*FLOORSHARE LINHA BRANCA*\n\n`;
             relatorio += `*Rede:* ${dados.rede}\n`;
             if(dados.idRede) relatorio += `*ID:* ${dados.idRede}\n`;
             relatorio += `*Filial:* ${dados.filial}\n`;
             relatorio += `*Cidade:* ${dados.cidade}\n`;
-            relatorio += `*Consultor:* ${dados.consultor}\n`;
             relatorio += `*Data:* ${dados.data}\n\n`;
             
             if (dados.observacoes) {
@@ -451,6 +594,8 @@
             
             relatorio += `*PARTICIPAÇÃO*\n`;
             relatorio += `------------------------------\n`;
+            
+            const todasCategorias = [...categoriasMDA, ...categoriasSDA];
             
             const marcasOrdenadas = Object.entries(brandsData)
                 .sort(([nomeA, dataA], [nomeB, dataB]) => {
@@ -462,11 +607,11 @@
             marcasOrdenadas.forEach(([marca, data]) => {
                 const pctTotal = calcularPorcentagem(data.total, totais.totalGeral);
                 relatorio += `*${marca.toUpperCase()}*: ${pctTotal}% (${data.total} un)\n`;
-                if(data.refrigeradores > 0) relatorio += `  Ref: ${data.refrigeradores}\n`;
-                if(data.lavadoras > 0) relatorio += `  Lav: ${data.lavadoras}\n`;
-                if(data.fogao > 0) relatorio += `  Fogão: ${data.fogao}\n`;
-                if(data.aspirador > 0) relatorio += `  Aspirador: ${data.aspirador}\n`;
-                if(data.airfryer > 0) relatorio += `  AirFryer: ${data.airfryer}\n`;
+                todasCategorias.forEach(cat => {
+                    if (data[cat.key] > 0) {
+                        relatorio += `  ${cat.nome}: ${data[cat.key]}\n`;
+                    }
+                });
                 relatorio += `\n`;
             });
             
@@ -476,13 +621,17 @@
             return relatorio;
         }
 
-        // Geração PDF (Ajustado layout para incluir Fogão, Aspirador e AirFryer)
+        // Geração PDF (atualizado sem campos de equipe)
         async function gerarPDF(dados, brandsData, totais) {
-            const pdf = new jsPDF('landscape', 'mm', 'a4'); // Paisagem para caber todas as colunas
+            const todasCategorias = [...categoriasMDA, ...categoriasSDA];
+            const numColunas = todasCategorias.length + 2;
+            const isLandscape = numColunas > 6;
+            
+            const pdf = new jsPDF(isLandscape ? 'landscape' : 'portrait', 'mm', 'a4');
             const pageWidth = pdf.internal.pageSize.width;
             
             // Cabeçalho
-            pdf.setFillColor(26, 59, 93); // Electrolux primary
+            pdf.setFillColor(26, 59, 93);
             pdf.rect(0, 0, pageWidth, 30, 'F');
             
             pdf.setTextColor(255, 255, 255);
@@ -495,25 +644,22 @@
             
             let y = 45;
             
-            // Dados Gerais
+            // Dados Gerais (sem equipe)
             pdf.setTextColor(0, 0, 0);
             pdf.setFontSize(10);
             pdf.setFont('helvetica', 'bold');
-            pdf.text('DADOS DA LOJA E EQUIPE', 15, y);
+            pdf.text('DADOS DA REDE', 15, y);
             
             pdf.setDrawColor(200, 200, 200);
             pdf.line(15, y+2, pageWidth-15, y+2);
             y += 8;
             
             pdf.setFont('helvetica', 'normal');
-            
             pdf.text(`Rede: ${dados.rede}`, 15, y);
-            pdf.text(`Filial: ${dados.filial}`, 15, y + 6);
-            pdf.text(`Cidade: ${dados.cidade}`, 15, y + 12);
-            
-            pdf.text(`Data: ${dados.data}`, 150, y);
-            pdf.text(`Consultor: ${dados.consultor}`, 150, y + 6);
-            pdf.text(`Coordenador: ${dados.coordenador}`, 150, y + 12);
+            pdf.text(`ID: ${dados.idRede}`, 15, y + 6);
+            pdf.text(`Filial: ${dados.filial}`, 15, y + 12);
+            pdf.text(`Cidade: ${dados.cidade}`, pageWidth/2 + 10, y);
+            pdf.text(`Data: ${dados.data}`, pageWidth/2 + 10, y + 6);
             
             y += 25;
             
@@ -534,31 +680,34 @@
             pdf.text('ANÁLISE DE SHARE', 15, y);
             y += 5;
 
-            // Cabeçalho Tabela
             pdf.setFillColor(240, 240, 240);
             pdf.rect(15, y, pageWidth - 30, 8, 'F');
             pdf.setFontSize(7);
             
-            // Coordenadas X para 7 colunas (Marca, Ref, Lav, Fogão, Asp, Air, Total, %)
-            const colX = { 
-                marca: 17, 
-                ref: 60, 
-                lav: 85, 
-                fogao: 110, 
-                aspirador: 135, 
-                airfryer: 160, 
-                total: 185, 
-                pct: 210 
-            };
+            const tableWidth = pageWidth - 30;
+            const colWidthMarca = 30;
+            const remainingWidth = tableWidth - colWidthMarca;
+            const colWidthCategoria = remainingWidth / (todasCategorias.length + 2);
             
-            pdf.text('MARCA', colX.marca, y + 5);
-            pdf.text('REFRIG.', colX.ref, y + 5);
-            pdf.text('LAVADORAS', colX.lav, y + 5);
-            pdf.text('FOGÃO', colX.fogao, y + 5);
-            pdf.text('ASPIRADOR', colX.aspirador, y + 5);
-            pdf.text('AIRFRYER', colX.airfryer, y + 5);
-            pdf.text('TOTAL', colX.total, y + 5);
-            pdf.text('SHARE %', colX.pct, y + 5);
+            let currentX = 15;
+            const colPositions = {};
+            
+            pdf.text('MARCA', currentX + 2, y + 5);
+            colPositions['marca'] = currentX;
+            currentX += colWidthMarca;
+            
+            todasCategorias.forEach(cat => {
+                pdf.text(cat.nome.toUpperCase(), currentX + 2, y + 5);
+                colPositions[cat.key] = currentX;
+                currentX += colWidthCategoria;
+            });
+            
+            pdf.text('TOTAL', currentX + 2, y + 5);
+            colPositions['total'] = currentX;
+            currentX += colWidthCategoria;
+            
+            pdf.text('SHARE %', currentX + 2, y + 5);
+            colPositions['pct'] = currentX;
             
             y += 10;
 
@@ -573,51 +722,51 @@
                 const isElectrolux = marca.toUpperCase() === 'ELECTROLUX';
                 
                 if (isElectrolux) {
-                    pdf.setFillColor(230, 237, 245); // Electrolux light
-                    pdf.rect(15, y - 1, pageWidth - 30, 7, 'F');
+                    pdf.setFillColor(230, 237, 245);
+                    pdf.rect(15, y - 1, tableWidth, 7, 'F');
                     pdf.setFont('helvetica', 'bold');
                 } else {
                     pdf.setFont('helvetica', 'normal');
                 }
 
-                pdf.text(marca.substring(0, 18), colX.marca, y + 4);
-                pdf.text(data.refrigeradores.toString(), colX.ref, y + 4);
-                pdf.text(data.lavadoras.toString(), colX.lav, y + 4);
-                pdf.text(data.fogao.toString(), colX.fogao, y + 4);
-                pdf.text(data.aspirador.toString(), colX.aspirador, y + 4);
-                pdf.text(data.airfryer.toString(), colX.airfryer, y + 4);
-                pdf.text(data.total.toString(), colX.total, y + 4);
+                pdf.text(marca.substring(0, 18), colPositions['marca'] + 2, y + 4);
+                
+                todasCategorias.forEach(cat => {
+                    pdf.text((data[cat.key] || 0).toString(), colPositions[cat.key] + 2, y + 4);
+                });
+                
+                pdf.text(data.total.toString(), colPositions['total'] + 2, y + 4);
                 
                 const pct = calcularPorcentagem(data.total, totais.totalGeral);
-                pdf.text(`${pct}%`, colX.pct, y + 4);
+                pdf.text(`${pct}%`, colPositions['pct'] + 2, y + 4);
                 
                 y += 8;
             });
 
-            // Linha total
             y += 2;
             pdf.setLineWidth(0.5);
             pdf.line(15, y, pageWidth-15, y);
             y += 6;
             
             pdf.setFont('helvetica', 'bold');
-            pdf.text('TOTAIS GERAIS', colX.marca, y);
-            pdf.text(totais.totalRefrigeradores.toString(), colX.ref, y);
-            pdf.text(totais.totalLavadoras.toString(), colX.lav, y);
-            pdf.text(totais.totalFogao.toString(), colX.fogao, y);
-            pdf.text(totais.totalAspirador.toString(), colX.aspirador, y);
-            pdf.text(totais.totalAirfryer.toString(), colX.airfryer, y);
-            pdf.text(totais.totalGeral.toString(), colX.total, y);
+            pdf.text('TOTAIS GERAIS', colPositions['marca'] + 2, y);
+            
+            todasCategorias.forEach(cat => {
+                pdf.text((totais[cat.key] || 0).toString(), colPositions[cat.key] + 2, y);
+            });
+            
+            pdf.text(totais.totalGeral.toString(), colPositions['total'] + 2, y);
 
-            // Rodapé
             pdf.setFontSize(8);
             pdf.setFont('helvetica', 'normal');
             pdf.setTextColor(150, 150, 150);
-            pdf.text(`Gerado em ${new Date().toLocaleString('pt-BR')}`, pageWidth/2, 200, { align: 'center' });
+            const bottomY = isLandscape ? 200 : 285;
+            pdf.text(`Gerado em ${new Date().toLocaleString('pt-BR')}`, pageWidth/2, bottomY, { align: 'center' });
 
             pdf.save(`Floorshare_${dados.rede}.pdf`);
         }
 
+        // Evento principal
         document.getElementById('generate-report').addEventListener('click', function() {
             const brandsData = coletarDadosMarcas();
             const totais = calcularTotais(brandsData);
@@ -632,9 +781,6 @@
                 idRede: document.getElementById('id-rede').value || "-",
                 filial: document.getElementById('filial').value || "-",
                 cidade: document.getElementById('cidade').value || "-",
-                coordenador: document.getElementById('coordenador').value || "-",
-                consultor: document.getElementById('consultor').value || "-",
-                regional: document.getElementById('regional').value || "-",
                 data: formatarData(document.getElementById('data').value),
                 observacoes: document.getElementById('observacoes').value
             };
@@ -662,6 +808,9 @@
             }
         });
 
+        // Inicialização
+        renderizarConfigCategorias();
+        renderizarCategoriasElectrolux();
         document.getElementById('rede').focus();
     </script>
 </body>
